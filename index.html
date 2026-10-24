@@ -16,7 +16,7 @@
 
     <section class = "game-features">
         <h1 class="page-title">Tiger Clicker</h1>
-        <img src="assets/steak.png" alt="" class="steak" onclick="earnPoints()">
+        <img src="assets/steak.png" alt="" class="steak" onclick="earnPoints(event)">
         <div class="game-header">
     <p>Click the Steak to earn points!</p>
 
@@ -39,7 +39,13 @@
         <img src="assets/earth.png" alt="Earth" class="background-image">
         <img src="assets/tiger.png" alt="Tiger" class="tiger">
     </div>
-    <div class="stats"><p>Stats will be displayed here</p></div>
+    
+    <div class="playerstats">
+        <progress value="100" max="100" id="health"></progress>
+        <progress value="100" max="100" id="oxygen"></progress>
+        <p>Stats will be displayed here</p>
+
+    </div>
 </section>
 
     <section class="upgrade-section">

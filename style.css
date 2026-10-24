@@ -91,6 +91,11 @@ body {
     width: 25%;
     z-index: 2;
 }
+.playerstats{
+    display: flex;
+    flex-direction: column;
+}
+
 
 /* CLICKER AND UPGRADE AREA */
 .bottom-controls {
@@ -128,6 +133,24 @@ body {
     filter: drop-shadow(0 0 28px rgba(185, 5, 245, 0.9));
 }
 .steak:active { transform: scale(0.93); }
+
+/* the POP */
+.pop {
+    position: fixed;
+    z-index: 50;
+    pointer-events: none;      /* clicks pass through to the steak */
+    transform: translateX(-50%);
+    font-family: "Press Start 2P", monospace;
+    font-size: 18px;
+    color: #e6a6ff;
+    text-shadow: 2px 2px 0 #51206b;
+    animation: rise 0.8s ease-out forwards;
+}
+
+@keyframes rise {
+    from { opacity: 1; margin-top: 0; }
+    to   { opacity: 0; margin-top: -70px; }
+}
 
 /* UPGRADE BUTTON LAYOUT */
 .upgrade-controls {

@@ -1,29 +1,62 @@
-//Game Variables
+// Game Variables
 let points = 0;
 let pointsPerClick = 1;
 let pointsPerSecond = 0;
 let upgradeCost = 10;
 let upgradeCost2 = 100;
-let addEarnerCost = 100;
-//HTML Elements 
+let toastTimer;
+let hp = health;
+let ox = 100;
+
 function updateDisplay() {
     document.getElementById("points").textContent = points;
     document.getElementById("upgradeCost").textContent = upgradeCost;
     document.getElementById("upgradeCost2").textContent = upgradeCost2;
     document.getElementById("perSecond").textContent = pointsPerSecond;
+    document.getElementById("health").textContent = pointsPerSecond;
+    document.getElementById("oxygen").textContent = pointsPerSecond;
 }
-setInterval(function() {
+
+hp = aliveStatus;
+if (aliveStatus >1){
+    hp = 100;
+}
+
+setInterval(function () {
     points += pointsPerSecond;
     updateDisplay();
 }, 1000);
 
-//points per click
-function earnPoints() {
-    points = points += pointsPerClick;
-    updateDisplay();
+// Toast
+function showToast(message, type) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.className = "toast " + type + " show";
+
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+    }, 1000);
 }
- 
-//Clicker Upgrade purchase
+
+// Points per click
+function earnPoints(e) {
+    points += pointsPerClick;
+    updateDisplay();
+    spawnPop(e.clientX, e.clientY, "+" + pointsPerClick);
+}
+
+function spawnPop(x, y, text) {
+    const pop = document.createElement("span");
+    pop.className = "pop";
+    pop.textContent = text;
+    pop.style.left = (x + (Math.random() * 30 - 15)) + "px";
+    pop.style.top = (y - 10) + "px";
+    document.body.appendChild(pop);
+    pop.addEventListener("animationed", () => pop.remove());
+}
+
+// Chomp upgrade
 function buyUpgrade1() {
     if (points >= upgradeCost) {
         points -= upgradeCost;
@@ -35,8 +68,10 @@ function buyUpgrade1() {
         showToast("Not enough points!", "error");
     }
 }
-function buyUpgrade2(){
-     if (points >= upgradeCost2) {
+
+// Hungry Football Team
+function buyUpgrade2() {
+    if (points >= upgradeCost2) {
         points -= upgradeCost2;
         pointsPerSecond++;
         upgradeCost2 = upgradeCost2 * 2;
@@ -45,29 +80,20 @@ function buyUpgrade2(){
     } else {
         showToast("Not enough points!", "error");
     }
+}
+
+// Placeholders so the unfinished buttons don't throw errors
+function constantEarner1() { showToast("Coming soon!", "error"); }
+function planetChange()    { showToast("Coming soon!", "error"); }
+
 function resetGame() {
     points = 0;
     pointsPerClick = 1;
+    pointsPerSecond = 0;
     upgradeCost = 10;
     upgradeCost2 = 100;
-    pointsPerSecond= = 0
-    upgradecounter = 0;
     updateDisplay();
+    showToast("Game reset!", "success");
 }
 
-//Toast
-let toastTimer;
-
-function showToast(message, type) {
-    const toast = document.getElementById("toast");
-    toast.textContent = message;
-    toast.className = "toast " + type + " show";
-
-    clearTimeout(toastTimer); //restarts if click p much
-    toastTimer = setTimeout(() => {
-        toast.classList.remove("show");
-    }, 1000);  // 1 second
-}
-
-
-}
+updateDisplay();
