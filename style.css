@@ -9,69 +9,87 @@ body {
     align-items: center;
     user-select: none;
     margin: 0;
-    font-family: sans-serif;
+    font-family: VT323;
+    font-size: 20px;
     background-color: #00022E;
     color: white;
     
 }
 
 .upgrade-section {
+    overflow-y: auto; 
+    overflow-x: hidden; 
     display: flex;
     flex-direction: column;
+    align-items: center;
     padding: 16px 22px;
     gap: 25px;
     margin-top: 0;
-    width: 33vw;
-    height:60px;   
+    width: 25vw;
+    height:100vh;   
+}
+.fangs-icon, .helmet-icon,.astronaut-icon, .planets-icon, .crowd-icon, .reset-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 16px;
+}
+.upgrade1, .upgrade2, .upgrade3, .upgrade4, .upgrade5, .suitChange, .planetChange, .reset-button {
+    align-items: center;
+    width: 100%;
+    margin-bottom: 8px;
+}
+.upgrade-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
 }
 .game-features {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
-    margin-top: 24px;
-    width: 33vw;   
+    gap: 63px;
+    width: 25vw;   
 }
 
-/* GAME SCREEN */
+/* MIDDLE SECTION: PLANET, TIGER, STATS */
 .game-screen {
     display: flex;
     flex-direction: column;
+    align-items: center;
     position: relative;
     isolation: isolate;
-    width: 33vw;
+    width: 50vw;
     height: 100vh;
-    min-height: 600px;
     overflow: hidden;
-    background: #0f2345;
 }
+
 .game-background {
-    position: relative;
+    position: absolute;
     inset: 0;
     z-index: 0;
-
-    background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpEamawJ2dzIm0eb1wK7aAURtMP61eSQnADsOuJ0mF9NLdAcDbKvIvygWQbv1qTYtCNciGEbRhGeRfuzNq5qJFfvoVnqYYE1DzHCUxf0-k&s=10")
-        center / cover no-repeat;
 }
 
-/* TITLE AND POINTS */
-.game-header {
+.earth-wrapper {
+    position: relative;
+    z-index: 1;
+    width: 90%;                
+    max-width: 90vh;           
+    margin: auto;              
+}
+.background-image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.tiger {
     position: absolute;
-    top: 24px;
-    justify-content: center;
-    padding: 16px 22px;
-    border: 1px solid rgba(185, 5, 245, 0.6);
-    border-radius: 16px;
-    background: rgba(0, 2, 46, 0.75);
-}
-
-.game-header h1 {
-    margin-top: 0;
-    color: #e6a6ff;
-}
-
-.game-header p {
-    margin-bottom: 8px;
+    top:52%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25%;
+    z-index: 2;
 }
 
 /* CLICKER AND UPGRADE AREA */
@@ -98,26 +116,18 @@ body {
         opacity: 0.7;
     }
 /* MAIN CLICKER */
-.clicker-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 180px;
-    height: 180px;
-    color: white;
-
-    font-size: 20px;
-    font-weight: bold;
+.steak {
+    width: min(350px, 80%);
+    height: auto;
     cursor: pointer;
-
+    filter: drop-shadow(0 0 18px rgba(185, 5, 245, 0.5));
+    transition: transform 0.1s, filter 0.2s;
 }
-
-
-.clicker-button:active {
-    transform: scale(0.95);
+.steak:hover {
+    transform: scale(1.04);
+    filter: drop-shadow(0 0 28px rgba(185, 5, 245, 0.9));
 }
-
-
+.steak:active { transform: scale(0.93); }
 
 /* UPGRADE BUTTON LAYOUT */
 .upgrade-controls {
@@ -129,7 +139,17 @@ body {
 
 /* UPGRADE BUTTONS */
 .upgrade-button,
+.upgrade1,
+.upgrade2,
+.upgrade3,
+.upgrade4,
+.planetChange,
+.suitChange,
 .reset-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
     padding: 12px 18px;
     border: 1px solid #b905f5;
     border-radius: 10px;
@@ -177,7 +197,57 @@ body {
         width: 100%;
         max-width: 300px;
     }
-    .stats {
-        font-size: 14px;
-    }
+    
+}
+
+/* TOAST MESSAGES */
+.toast {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    z-index: 100;
+
+    padding: 22px 34px;
+    font-size: 22px;
+    border-radius: 10px;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s, transform 0.25s;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.toast.success {
+    background: rgba(185, 5, 245, 0.6);
+    border: 1px solid #4ade80;
+}
+
+.toast.error {
+    background: rgba(0, 2, 46, 0.9);
+    border: 1px solid #f87171;
+}
+
+/* TITLES */
+.page-title {
+    margin: 0;
+    font-size: 57px;          
+    text-align: center;
+    color: #e6a6ff;
+    letter-spacing: 2px;
+    text-shadow: 0 0 12px rgba(185, 5, 245, 0.8);   
+}
+.upgrade-title {
+    margin: 0;
+    font-size: 45px;          
+    text-align: center;
+    color: #e6a6ff;
+    letter-spacing: 2px;
+    text-shadow: 0 0 12px rgba(185, 5, 245, 0.8);   
 }
