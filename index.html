@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Space Clicker</title>
+</head>
+<body>
+    <h1> Space Clicker</h1>
+
+    <p>Click the button to earn points!</p>
+    <p> Points: <span id="points">0</span></p>
+
+    <button onclick="earnPoints()">CLICK ME!</button>
+    <script>
+        let points = 0;
+        function earnPoints() {
+        points++;
+        document.getElementById("points").textContent = points;
+    }
+    </script>
+
+    <button onclick="">Buy Upgrade</button>
+
+</body>
+</html>
