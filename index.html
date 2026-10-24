@@ -1,24 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Space Clicker</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <h1> Space Clicker</h1>
+    
+    <div id="toast" class="toast"><</div>   
 
-    <p>Click the button to earn points!</p>
-    <p> Points: <span id="points">0</span></p>
+    <section class = "game-features">
+        <img src="assets/steak.png" alt="" class="clicker-button" onclick="earnPoints()">
+        <div class="game-header">
+                <h1>Space Clicker</h1>
+                <p>Click the button to earn points!</p>
+                <p>Points: <span id="points">0</span></p>
+                <p>Per second: <span id="perSecond">0</span></p>
+        </div>
 
-    <button onclick="earnPoints()">CLICK ME!</button>
-    <script>
-        let points = 0;
-        function earnPoints() {
-        points++;
-        document.getElementById("points").textContent = points;
-    }
-    </script>
+         <p class="credit">Created by RichJosh</p>
+    </section>
+    
+    <section class="game-screen">
+        <!-- Background image -->
+         <div class="stats">  
+            <p>Stats will be displayed here</p></div>
+         <div class="game-background"></div>
+         
+        </section>
 
-    <button onclick="">Buy Upgrade</button>
+    <section class="upgrade-section">
+                    <button class="upgrade-button" onclick="buyClickerUpgrade()">
+                        Buy Clicker Upgrade: <span id="upgradeCost">10</span> points
+                    </button>
+
+                    <button class="upgrade-button" onclick="constantEarner1()">
+                        Buy Constant Earner 1: <span id="addEarnerCost">100</span> points
+                    </button>
+
+                    <button class="reset-button" onclick="resetGame()">
+                        Reset Game
+                    </button>
+
+    </section>
 
 </body>
 </html>

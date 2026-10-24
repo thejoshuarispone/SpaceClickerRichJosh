@@ -1,0 +1,183 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display:flex;
+    justify-content: 100px;
+    align-items: center;
+    user-select: none;
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #00022E;
+    color: white;
+    
+}
+
+.upgrade-section {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 22px;
+    gap: 25px;
+    margin-top: 0;
+    width: 33vw;
+    height:60px;   
+}
+.game-features {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-top: 24px;
+    width: 33vw;   
+}
+
+/* GAME SCREEN */
+.game-screen {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    isolation: isolate;
+    width: 33vw;
+    height: 100vh;
+    min-height: 600px;
+    overflow: hidden;
+    background: #0f2345;
+}
+.game-background {
+    position: relative;
+    inset: 0;
+    z-index: 0;
+
+    background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpEamawJ2dzIm0eb1wK7aAURtMP61eSQnADsOuJ0mF9NLdAcDbKvIvygWQbv1qTYtCNciGEbRhGeRfuzNq5qJFfvoVnqYYE1DzHCUxf0-k&s=10")
+        center / cover no-repeat;
+}
+
+/* TITLE AND POINTS */
+.game-header {
+    position: absolute;
+    top: 24px;
+    justify-content: center;
+    padding: 16px 22px;
+    border: 1px solid rgba(185, 5, 245, 0.6);
+    border-radius: 16px;
+    background: rgba(0, 2, 46, 0.75);
+}
+
+.game-header h1 {
+    margin-top: 0;
+    color: #e6a6ff;
+}
+
+.game-header p {
+    margin-bottom: 8px;
+}
+
+/* CLICKER AND UPGRADE AREA */
+.bottom-controls {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+/* CREDITS */
+.credit {
+        position: absolute;
+        bottom: 6px;
+        left: 0;
+        right: 0;
+        margin: 0;
+        text-align: leftrigh;
+        font-size: 12px;
+        opacity: 0.7;
+    }
+/* MAIN CLICKER */
+.clicker-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+    height: 180px;
+    color: white;
+
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+
+}
+
+
+.clicker-button:active {
+    transform: scale(0.95);
+}
+
+
+
+/* UPGRADE BUTTON LAYOUT */
+.upgrade-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+/* UPGRADE BUTTONS */
+.upgrade-button,
+.reset-button {
+    padding: 12px 18px;
+    border: 1px solid #b905f5;
+    border-radius: 10px;
+
+    background: rgba(0, 2, 46, 0.9);
+    color: white;
+
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.upgrade-button:hover {
+    background: #51206b;
+}
+
+.reset-button {
+    border-color: #b905f5;
+}
+
+.reset-button:hover {
+    background: #51206b;
+}
+
+/* SMALL SCREEN SUPPORT */
+@media (max-width: 600px) {
+    .game-header {
+        top: 12px;
+        left: 12px;
+    }
+
+    .bottom-controls {
+        left: 12px; 
+        right: 12px;
+        bottom: 16px;
+    }
+
+    .upgrade-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .upgrade-button,
+    .reset-button {
+        width: 100%;
+        max-width: 300px;
+    }
+    .stats {
+        font-size: 14px;
+    }
+}
