@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,116 +11,118 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
-<body>
-    
-    <div id="toast" class="toast"></div>   
 
-    <section class = "game-features">
+<body>
+
+    <div id="toast" class="toast"></div>
+
+    <section class="game-features">
         <h1 class="page-title">Tiger Clicker</h1>
         <img src="assets/steak.png" alt="Click the steak to earn points" class="steak" onclick="earnPoints(event)">
         <div class="game-header">
-    <p>Click the Steak to earn points!</p>
+            <p>Click the Steak to earn points!</p>
 
-    <div class="points-box">
-        Points: <span id="points">0</span>
-    </div>
+            <div class="points-box">
+                Points: <span id="points">0</span>
+            </div>
 
-    <div class="persec-box">
-        Per second: <span id="perSecond">0</span>
-    </div>
-</div>
+            <div class="persec-box">
+                Per second: <span id="perSecond">0</span>
+            </div>
+        </div>
 
-         <p class="credit">Created by RichJosh</p>
+        <p class="credit">Created by RichJosh</p>
     </section>
-    
- <section class="game-screen"> 
-    <div class="game-background"></div>
 
-    <div class="earth-wrapper">
-        <img src="assets/earth.png" alt="Earth" class="background-image">
-        <img src="assets/tiger.png" alt="Tiger" class="tiger">
-    </div>
-    
-       <div class="playerstats">
-       <label>HP <progress value="100" max="100" id="health"></progress></label>
-       <label>O2 <progress value="100" max="100" id="oxygen"></progress></label>
-    </div>
+    <section class="game-screen">
+        <div class="game-background"></div>
 
-</section>
+        <div class="earth-wrapper">
+            <img src="assets/earth.png" alt="Earth" class="background-image" id="planetImg">
+            <img src="assets/tiger.png" alt="Tiger" class="tiger" id="tigerImg">
+        </div>
+
+        <div class="playerstats">
+            <label>HP <progress value="100" max="100" id="health"></progress></label>
+            <label>O2 <progress value="100" max="100" id="oxygen"></progress></label>
+        </div>
+
+    </section>
 
     <section class="upgrade-section">
-    <h2 class="upgrade-title">Upgrades:</h2>
+        <h2 class="upgrade-title">Upgrades:</h2>
 
-    <button class="upgrade1" onclick="buyUpgrade1()">
-        <div class="upgrade-icon">
-            <img src="./assets/fangs.png" alt="Fangs Icon" class="fangs-icon">
-        </div>
-        <div class="upgrade-text">
-            Chomp Upgrade:
-            <p><span id="upgradeCost">10</span> points</p>
-        </div>
-        <div class="upgrade-value">LVL</div>
-    </button>
+        <button class="upgrade1" onclick="buyBuilding('chomp')">
+            <div class="upgrade-icon">
+                <img src="./assets/fangs.png" alt="Fangs Icon" class="fangs-icon">
+            </div>
+            <div class="upgrade-text">
+                Chomp Upgrade:
+                <p><span id="upgradeCost">10</span> points</p>
+            </div>
+            <div class="upgrade-value">LVL <span id="level1">0</span></div>
+        </button>
 
-    <button class="upgrade2" onclick="buyUpgrade2()">
-        <div class="upgrade-icon">
-            <img src="./assets/helmet.png" alt="Helmet Icon" class="helmet-icon">
-        </div>
-        <div class="upgrade-text">
-            Hungry Football Team:
-            <p><span id="upgradeCost2">100</span> points</p>
-        </div>
-        <div class="upgrade-value">LVL</div>
-    </button>
+        <button class="upgrade2" onclick="buyBuilding('football')">
+            <div class="upgrade-icon">
+                <img src="./assets/helmet.png" alt="Helmet Icon" class="helmet-icon">
+            </div>
+            <div class="upgrade-text">
+                Hungry Football Team:
+                <p><span id="upgradeCost2">100</span> points</p>
+            </div>
+            <div class="upgrade-value">LVL <span id="level2">0</span></div>
+        </button>
 
-    <button class="upgrade3" onclick="constantEarner1()">
-        <div class="upgrade-icon">
-            <img src="./assets/crowd.png" alt="Crowd Icon" class="crowd-icon">
-        </div>
-        <div class="upgrade-text">
-            Union Rush Hour:
-            <p><span id="upgradeCost3">10</span> points</p>
-        </div>
-        <div class="upgrade-value">LVL</div>
-    </button>
+        <button class="upgrade3" onclick="buyBuilding('union')">
+            <div class="upgrade-icon">
+                <img src="./assets/crowd.png" alt="Crowd Icon" class="crowd-icon">
+            </div>
+            <div class="upgrade-text">
+                Union Rush Hour:
+                <p><span id="upgradeCost3">1000</span> points</p>
+            </div>
+            <div class="upgrade-value">LVL <span id="level3">0</span></div>
+        </button>
 
-    <button class="upgrade4" onclick="constantEarner1()">
-        <div class="upgrade-icon">
-            <img src="./assets/study.png" alt="Study Icon" class="study-icon">
-        </div>
-        <div class="upgrade-text">
-            Super Study Group:
-            <p><span id="upgradeCost4">10</span> points</p>
-        </div>
-        <div class="upgrade-value">LVL</div>
-    </button>
+        <button class="upgrade4" onclick="constantEarner1()">
+            <div class="upgrade-icon">
+                <img src="./assets/study.png" alt="Study Icon" class="study-icon">
+            </div>
+            <div class="upgrade-text">
+                Super Study Group:
+                <p><span id="upgradeCost4">10</span> points</p>
+            </div>
+            <div class="upgrade-value">LVL</div>
+        </button>
 
-    <button class="suitChange" onclick="constantEarner1()">
-        <div class="upgrade-icon">
-            <img src="./assets/astronaut.png" alt="Astronaut Icon" class="astronaut-icon">
-        </div>
-        <div class="upgrade-text">
-            Space Suit Upgrade:
-            <p><span id="upgradeCost5">10</span> points</p>
-        </div>
-        <div class="upgrade-value">LVL</div>
-    </button>
+        <button class="suitChange" onclick="buySuit()">
+            <div class="upgrade-icon">
+                <img src="./assets/astronaut.png" alt="Astronaut Icon" class="astronaut-icon">
+            </div>
+            <div class="upgrade-text">
+                Space Suit:
+                <p><span id="upgradeCost5">5000</span> points</p>
+            </div>
+            <div class="upgrade-value">LVL <span id="level5">0</span></div>
+        </button>
 
-    <button class="planetChange" onclick="planetChange()">
-        <div class="upgrade-icon">
-            <img src="./assets/planets.png" alt="Planets Icon" class="planets-icon">
-        </div>
-        <div class="upgrade-text">
-            Change Planet:
-            <p><span id="upgradeCost6">10</span> points</p>
-        </div>
-        <div class="upgrade-value">LVL</div>
-    </button>
+        <button class="planetChange" onclick="planetChange()">
+            <div class="upgrade-icon">
+                <img src="./assets/planets.png" alt="Planets Icon" class="planets-icon">
+            </div>
+            <div class="upgrade-text">
+                Ascent:
+                <p><span id="upgradeCost6">10000</span> points</p>
+            </div>
+            <div class="upgrade-value">LVL <span id="level6">0</span></div>
+        </button>
 
-    <button class="reset-button" onclick="resetGame()">
-        Reset Game
-    </button>
-</section>
+        <button class="reset-button" onclick="resetGame()">
+            Reset Game
+        </button>
+    </section>
 
 </body>
+
 </html>
