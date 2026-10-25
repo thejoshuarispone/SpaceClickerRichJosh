@@ -15,14 +15,14 @@ let planetLevel = 0;
 const planets = [
     { name: "Earth", img: "assets/earth.png" },
     { name: "Moon", img: "assets/moon.png" },
-    {name: "Mars", img: "assets/mars.png"}
+    { name: "Mars", img: "assets/mars.png" }
 ];
 
 // Buildings 
 const buildings = {
-    chomp: { name: "Chomp Upgrade", baseCost: 10, click: 1*(1+planetLevel), rate: 0, count: 0, costId: "upgradeCost", lvlId: "level1" },
-    football: { name: "Hungry Football Team", baseCost: 100, click: 0, rate: 1*(1+planetLevel), count: 0, costId: "upgradeCost2", lvlId: "level2" },
-    union: { name: "Union Rush Hour", baseCost: 1000, click: 0, rate: 10*(1+planetLevel), count: 0, costId: "upgradeCost3", lvlId: "level3" }
+    chomp: { name: "Chomp Upgrade", baseCost: 10, click: 1 * (1 + planetLevel), rate: 0, count: 0, costId: "upgradeCost", lvlId: "level1" },
+    football: { name: "Hungry Football Team", baseCost: 100, click: 0, rate: 1 * (1 + planetLevel), count: 0, costId: "upgradeCost2", lvlId: "level2" },
+    union: { name: "Union Rush Hour", baseCost: 1000, click: 0, rate: 10 * (1 + planetLevel), count: 0, costId: "upgradeCost3", lvlId: "level3" }
 };
 
 function getCost(b) {
@@ -112,36 +112,39 @@ const tempDrain = 3;
 
 
 function survivalTick() {
-    if (planetLevel <= 0) { // Only drain oxygen on planets other than Earth
+    if (planetLevel <= 0) {
         ox = 100;
+        temp = 100;
         return;
     }
 
+    // Oxygen (Moon and Mars)
     const before = ox;
     ox = Math.max(0, ox - oxygenDrain);
-    
     if (before >= oxygenThrreshold && ox < oxygenThrreshold) {
         showToast("Oxygen is low!", "error", 2000);
     }
-
     if (ox < oxygenThrreshold) {
         hp = Math.max(0, hp - suffocateDmg);
-        if (hp === 0) {
-            resetGame("You died due to suffocation! Game reset.", "error", 2500);
-        }
     }
-    // Temperature survival system — Mars
-if (planetLevel === 2) {
-    temp = Math.max(0, temp - tempDrain);
 
-    if (temp < tempThreshold) {
-        hp = Math.max(0, hp - freezeDmg);
-
-        if (hp === 0) {
-            resetGame("You died from freezing! Game reset.", "error", 2500);
+    // Temperature (Mars only)
+    if (planetLevel === 2) {
+        temp = Math.max(0, temp - tempDrain);
+        if (temp < tempThreshold) {
+            hp = Math.max(0, hp - freezeDmg);
         }
+    } else {
+        temp = 100;
     }
-}
+
+    // Death for both
+    if (hp === 0) {
+        const msg = ox < oxygenThrreshold
+            ? "You died from suffocation! Game reset."
+            : "You died from freezing! Game reset.";
+        resetGame(msg, "error", 2500);
+    }
 }
 
 
@@ -222,7 +225,7 @@ function buyOxygen() {
     tanksUsed++;
     updateDisplay();
     showToast("Oxygen Tank used! Oxygen restored to 100.", "success");
-    }
+}
 
 function resetGame(message = "Game reset!", type = "success", duration = 2500) {
     points = 0;
@@ -241,7 +244,7 @@ function resetGame(message = "Game reset!", type = "success", duration = 2500) {
     showToast(message, type, duration);
 }
 
-function backPlanet(){
+function backPlanet() {
     if (planetLevel <= 0) {
         showToast("You are already on Earth!", "error");
         return;
