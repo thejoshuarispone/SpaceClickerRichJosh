@@ -155,7 +155,7 @@ setInterval(function () {
 }, 1000);
 
 // Toast
-function showToast(message, type) {
+function showToast(message, type, duration = 1000) {
     const toast = document.getElementById("toast");
     toast.textContent = message;
     toast.className = "toast " + type + " show";
@@ -163,7 +163,7 @@ function showToast(message, type) {
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => {
         toast.classList.remove("show");
-    }, 1000);
+    }, duration);
 }
 
 // Points per click
@@ -210,10 +210,11 @@ function buyOxygen() {
     showToast("Oxygen Tank used! Oxygen restored to 100.", "success");
     }
 
-function resetGame() {
+function resetGame(message = "Game reset!", type = "success", duration = 2500) {
     points = 0;
     hp = 100;
     ox = 100;
+    hasSuit = false;
     tanksUsed = 0;
     planetLevel = 0;
     let hasSuit = false;
@@ -221,8 +222,9 @@ function resetGame() {
         buildings[key].count = 0;
     }
     recalcStats();
+    setScene();
     updateDisplay();
-    showToast("Game reset!", "success");
+    showToast(message, type, duration);
 }
 
 function backPlanet(){
