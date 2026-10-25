@@ -5,6 +5,7 @@ let pointsPerSecond = 0;
 let toastTimer;
 let hp = 100;
 let ox = 100;
+let temp = 100;
 
 // Space Prog
 const suitCost = 5000;
@@ -105,6 +106,10 @@ function planetChange() {
 const oxygenDrain = 1; // Oxygen depletion per second on the moonn
 const oxygenThrreshold = 30; // Oxygen b4 health starts depleting
 const suffocateDmg = 5; // Health depletion per second when oxygen is 0
+const tempThreshold = 20; //Temp b4 health starts depleteing
+const freezeDmg = 3; //Temp depletion per second when temp = 0
+const tempDrain = 3;
+
 
 function survivalTick() {
     if (planetLevel <= 0) { // Only drain oxygen on planets other than Earth
@@ -125,7 +130,20 @@ function survivalTick() {
             resetGame("You died due to suffocation! Game reset.", "error", 2500);
         }
     }
+    // Temperature survival system — Mars
+if (planetLevel === 2) {
+    temp = Math.max(0, temp - tempDrain);
+
+    if (temp < tempThreshold) {
+        hp = Math.max(0, hp - freezeDmg);
+
+        if (hp === 0) {
+            resetGame("You died from freezing! Game reset.", "error", 2500);
+        }
+    }
 }
+}
+
 
 setInterval(function () {
     points += pointsPerSecond;
@@ -138,6 +156,7 @@ function updateDisplay() {
     document.getElementById("perSecond").textContent = pointsPerSecond;
     document.getElementById("health").value = hp;
     document.getElementById("oxygen").value = ox;
+    document.getElementById("temp").value = temp;
     document.getElementById("upgradeCost4").textContent = oxygenCost;
     document.getElementById("level4").textContent = tanksUsed;
 
@@ -148,11 +167,6 @@ function updateDisplay() {
     }
 }
 
-setInterval(function () {
-    points += pointsPerSecond;
-    survivalTick();
-    updateDisplay();
-}, 1000);
 
 // Toast
 function showToast(message, type, duration = 1000) {
@@ -214,6 +228,7 @@ function resetGame(message = "Game reset!", type = "success", duration = 2500) {
     points = 0;
     hp = 100;
     ox = 100;
+    temp = 100;
     hasSuit = false;
     tanksUsed = 0;
     planetLevel = 0;
