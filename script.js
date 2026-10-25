@@ -125,9 +125,7 @@ function buyBuilding(key) {
     if (points >= cost) {
         points -= cost;
         b.count++;
-        console.log("buying building");
         recalcStats();
-        console.log("after recalc");
        updateDisplay();
         saveGame();
     const gain = b.click
