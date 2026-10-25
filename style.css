@@ -2,6 +2,7 @@
     box-sizing: border-box;
 }
 
+
 body {
     display: flex;
     justify-content: 100px;
@@ -33,9 +34,18 @@ body {
 .astronaut-icon,
 .planets-icon,
 .crowd-icon,
-.study-icon {
+.reset-icon
+ {
+    margin: 0px;
     width: 50px;
     height: 50px;
+    margin-bottom: 16px;
+}
+
+.oxygen-icon
+{
+    width: 60px;
+    height: 60px;
     margin-bottom: 16px;
 }
 
@@ -46,7 +56,8 @@ body {
 .upgrade5,
 .suitChange,
 .planetChange,
-.reset-button {
+.reset-button,
+.backPlanet {
     align-items: center;
     width: 100%;
     margin-bottom: 8px;
@@ -111,6 +122,7 @@ body {
 .playerstats {
     display: flex;
     flex-direction: column;
+    align-items: right;
 }
 
 
@@ -200,7 +212,8 @@ body {
 .upgrade4,
 .planetChange,
 .suitChange,
-.reset-button {
+.reset-button,
+.backPlanet {
     display: flex;
     align-items: center;
     justify-content: space-between;

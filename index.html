@@ -45,6 +45,7 @@
         <div class="playerstats">
             <label>HP <progress value="100" max="100" id="health"></progress></label>
             <label>O2 <progress value="100" max="100" id="oxygen"></progress></label>
+            <label> <progress value="100" max="100" id="temp"></progress></label>
         </div>
 
     </section>
@@ -87,7 +88,7 @@
 
         <button class="upgrade4" onclick="buyOxygen()">
             <div class="upgrade-icon">
-                <img src="./assets/study.png" alt="Oxygen Tank Icon" class="study-icon">
+                <img src="./assets/oxygen.png" alt="Oxygen Tank Icon" class="oxygen-icon">
             </div>
             <div class="upgrade-text">
                 Oxygen Tank:
@@ -119,10 +120,25 @@
         </button>
 
         <button class="reset-button" onclick="resetGame()">
+            <div class="upgrade-icon">
+                <img: src="/assets/reset.png" alt = "Reset Icon" class="reset-icon">
+            </div>
+            <div class="upgrade-text">
             Reset Game
+            </div>
+        </button>
+
+        <button class="backPlanet" onclick="backPlanet()">
+            <div class="upgrade-icon">
+                <img src="./assets/planets.png" alt="Planets Icon" class="planets-icon">
+            </div>
+             <div class="upgrade-text">
+            Prev. Planet
+            </div>
         </button>
     </section>
 
 </body>
+
 
 </html>

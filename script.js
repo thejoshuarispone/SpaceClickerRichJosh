@@ -13,14 +13,15 @@ let hasSuit = false;
 let planetLevel = 0;
 const planets = [
     { name: "Earth", img: "assets/earth.png" },
-    { name: "Moon", img: "assets/moon.png" }
+    { name: "Moon", img: "assets/moon.png" },
+    {name: "Mars", img: "assets/mars.png"}
 ];
 
 // Buildings 
 const buildings = {
-    chomp: { name: "Chomp Upgrade", baseCost: 10, click: 1, rate: 0, count: 0, costId: "upgradeCost", lvlId: "level1" },
-    football: { name: "Hungry Football Team", baseCost: 100, click: 0, rate: 1, count: 0, costId: "upgradeCost2", lvlId: "level2" },
-    union: { name: "Union Rush Hour", baseCost: 1000, click: 0, rate: 10, count: 0, costId: "upgradeCost3", lvlId: "level3" }
+    chomp: { name: "Chomp Upgrade", baseCost: 10, click: 1*(1+planetLevel), rate: 0, count: 0, costId: "upgradeCost", lvlId: "level1" },
+    football: { name: "Hungry Football Team", baseCost: 100, click: 0, rate: 1*(1+planetLevel), count: 0, costId: "upgradeCost2", lvlId: "level2" },
+    union: { name: "Union Rush Hour", baseCost: 1000, click: 0, rate: 10*(1+planetLevel), count: 0, costId: "upgradeCost3", lvlId: "level3" }
 };
 
 function getCost(b) {
@@ -215,12 +216,21 @@ function resetGame() {
     ox = 100;
     tanksUsed = 0;
     planetLevel = 0;
+    let hasSuit = false;
     for (const key in buildings) {
         buildings[key].count = 0;
     }
     recalcStats();
     updateDisplay();
     showToast("Game reset!", "success");
+}
+
+function backPlanet(){
+    planetLevel--
+     setScene();
+    updateDisplay();
+    showToast("Ascent successful! Welcome to " + planets[planetLevel].name + ".", "success", 2000);
+
 }
 
 updateDisplay();
