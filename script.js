@@ -7,6 +7,66 @@ let hp = 100;
 let ox = 100;
 let temp = 100;
 
+function saveGame() {
+    const gameData = {
+        points: points,
+        hasSuit: hasSuit,
+        planetLevel: planetLevel,
+        hp: hp,
+        ox: ox,
+        temp: temp,
+        tanksUsed: tanksUsed,
+
+        // Save the number of each building purchased
+        buildings: {}
+    };
+
+    for (const key in buildings) {
+        gameData.buildings[key] = buildings[key].count;
+    }
+
+    localStorage.setItem("spaceClickerSave", JSON.stringify(gameData));
+}
+
+
+function loadGame() {
+    const savedData = localStorage.getItem("spaceClickerSave");
+
+    if (!savedData) {
+        return;
+    }
+
+    try {
+        const gameData = JSON.parse(savedData);
+
+        points = gameData.points ?? 0;
+        hasSuit = gameData.hasSuit ?? false;
+        planetLevel = gameData.planetLevel ?? 0;
+        hp = gameData.hp ?? 100;
+        ox = gameData.ox ?? 100;
+        temp = gameData.temp ?? 100;
+        tanksUsed = gameData.tanksUsed ?? 0;
+
+        // Restore purchased buildings
+        if (gameData.buildings) {
+            for (const key in buildings) {
+                buildings[key].count = gameData.buildings[key] ?? 0;
+            }
+        }
+
+        // Recalculate click power and passive earnings
+        recalcStats();
+
+        // Restore the correct planet and character image
+        setScene();
+
+        console.log("Game loaded successfully!");
+
+    } catch (error) {
+        console.error("Could not load saved game:", error);
+    }
+}
+
 
 // Format large numbers using scientific notation
 function formatNumber(number) {
@@ -68,9 +128,12 @@ function buyBuilding(key) {
         console.log("buying building");
         recalcStats();
         console.log("after recalc");
-        updateDisplay();
-        const gain = b.click ? "+" + b.click + " per click" : "+" + b.rate + " per second";
-        showToast(b.name + " purchased! " + gain, "success");
+       updateDisplay();
+        saveGame();
+    const gain = b.click
+    ? "+" + b.click + " per click"
+    : "+" + b.rate + " per second";
+    showToast(b.name + " purchased! " + gain, "success");
     } else {
         showToast("Not enough points!", "error");
     }
@@ -92,10 +155,11 @@ function buySuit() {
     }
     if (points >= suitCost) {
         points -= suitCost;
-        hasSuit = true;
-        setScene();
-        updateDisplay();
-        showToast("Space Suit purchased! You can now survive in space.", "success");
+       hasSuit = true;
+    setScene();
+    updateDisplay();
+    saveGame();
+    showToast("Space Suit purchased! You can now survive in space.", "success");
     } else {
         showToast("Not enough points for Space Suit!", "error");
     }
@@ -124,6 +188,7 @@ function planetChange() {
     recalcStats();
     setScene();
     updateDisplay();
+    saveGame();
     showToast("Ascent successful! Welcome to " + planets[planetLevel].name + ".", "success", 2000);
 }
 
@@ -173,11 +238,20 @@ function survivalTick() {
 }
 
 
+// Main game loop
 setInterval(function () {
     points += pointsPerSecond;
+
     survivalTick();
+
     updateDisplay();
 }, 1000);
+
+
+// Automatically save every 5 seconds
+setInterval(function () {
+    saveGame();
+}, 5000);
 
 function updateDisplay() {
     document.getElementById("points").textContent = formatNumber(points);
@@ -212,6 +286,7 @@ function showToast(message, type, duration = 1000) {
 function earnPoints(e) {
     points += pointsPerClick;
     updateDisplay();
+    saveGame();
     spawnPop(e.clientX, e.clientY, "+" + formatNumber(pointsPerClick));
 }
 
@@ -249,23 +324,38 @@ function buyOxygen() {
     ox = 100;
     tanksUsed++;
     updateDisplay();
+    saveGame();
     showToast("Oxygen Tank used! Oxygen restored to 100.", "success");
 }
 
 function resetGame(message = "Game reset!", type = "success", duration = 2500) {
+    // Reset all game variables
     points = 0;
     hp = 100;
     ox = 100;
     temp = 100;
+
     hasSuit = false;
     tanksUsed = 0;
     planetLevel = 0;
+
+    // Reset all purchased buildings
     for (const key in buildings) {
         buildings[key].count = 0;
     }
+
+    // Recalculate statistics
     recalcStats();
+
+    // Restore Earth and the original character image
     setScene();
+
+    // Update the interface
     updateDisplay();
+
+    // Delete the previous save
+    localStorage.removeItem("spaceClickerSave");
+
     showToast(message, type, duration);
 }
 
@@ -281,5 +371,5 @@ function backPlanet() {
     showToast("Returned back! Welcome to " + planets[planetLevel].name + ".", "success", 2000);
 
 }
-
+loadGame();
 updateDisplay();
