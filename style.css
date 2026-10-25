@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+:root {
+    --slot: clamp(36px, 4vw, 70px);
+    /* width of the left icon column and the right LVL column */
+}
 
 body {
     display: flex;
@@ -18,8 +22,20 @@ body {
 
     background-color: #00022E;
     color: white;
+
+    user-select: none;
+    -webkit-user-select: none;
 }
 
+img {
+    -webkit-user-drag: none;
+    user-drag: none;
+    user-select: none;
+    -webkit-user-select: none;
+    image-rendering: pixelated;
+}
+
+/* RIGHT: UPGRADES */
 .upgrade-section {
     display: flex;
     flex-direction: column;
@@ -35,6 +51,15 @@ body {
     gap: 20px;
 }
 
+/* ICON SLOT: */
+.upgrade-icon {
+    width: var(--slot);
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .fangs-icon,
 .helmet-icon,
 .astronaut-icon,
@@ -43,7 +68,6 @@ body {
 .reset-icon {
     width: clamp(28px, 3vw, 50px);
     height: auto;
-
     margin: 0;
     flex-shrink: 0;
 }
@@ -51,11 +75,11 @@ body {
 .oxygen-icon {
     width: clamp(32px, 3.5vw, 60px);
     height: auto;
-
     margin: 0;
     flex-shrink: 0;
 }
 
+/* UPGRADE BUTTONS (one shared rule) */
 .upgrade1,
 .upgrade2,
 .upgrade3,
@@ -81,20 +105,56 @@ body {
     background: rgba(0, 2, 46, 0.9);
     color: white;
 
-    font-size: clamp(12px, 1.1vw, 16px);
+    font-family: "VT323", monospace;
+    font-size: clamp(16px, 1.5vw, 24px);
     cursor: pointer;
+    transition: background 0.2s;
 }
 
+.upgrade1:hover,
+.upgrade2:hover,
+.upgrade3:hover,
+.upgrade4:hover,
+.upgrade5:hover,
+.suitChange:hover,
+.planetChange:hover,
+.reset-button:hover,
+.backPlanet:hover {
+    background: #51206b;
+}
+
+/* TEXT: fills the middle and is centered */
 .upgrade-text {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
     gap: 4px;
 
     min-width: 0;
     overflow-wrap: anywhere;
 }
 
+.upgrade-text p {
+    margin: 0;
+}
+
+/* RIGHT COLUMN: same width as the icon slot, so the text sits in the true center */
+.upgrade-value {
+    width: var(--slot);
+    flex-shrink: 0;
+    text-align: center;
+}
+
+/* buttons with no LVL (Space Suit, Ascent, Prev. Planet, Reset) get an invisible spacer */
+.upgrade-section button:not(:has(.upgrade-value))::after {
+    content: "";
+    width: var(--slot);
+    flex-shrink: 0;
+}
+
+/* LEFT: GAMEPLAY */
 .game-features {
     display: flex;
     flex-direction: column;
@@ -141,35 +201,28 @@ body {
 
 .background-image {
     display: block;
-
     width: 100%;
     height: 100%;
-
     object-fit: contain;
 }
 
 .tiger {
     position: absolute;
-
     top: 52%;
     left: 50%;
-
     transform: translate(-50%, -50%);
-
     width: 25%;
     height: auto;
-
     z-index: 2;
 }
 
 .playerstats {
     display: flex;
     flex-direction: column;
-    align-items: right;
+    align-items: flex-end;
     margin-bottom: auto;
     width: auto;
 }
-
 
 /* CLICKER AND UPGRADE AREA */
 .bottom-controls {
@@ -191,8 +244,9 @@ body {
     left: 0;
     right: 0;
     margin: 0;
-    text-align: leftrigh;
-    font-size: 12px;
+    padding-left: 16px;
+    text-align: left;
+    font-size: 16px;
     opacity: 0.7;
 }
 
@@ -220,7 +274,6 @@ body {
     position: fixed;
     z-index: 50;
     pointer-events: none;
-    /* clicks pass through to the steak */
     transform: translateX(-50%);
     font-family: "Press Start 2P", monospace;
     font-size: 18px;
@@ -241,52 +294,6 @@ body {
     }
 }
 
-/* UPGRADE BUTTON LAYOUT */
-.upgrade-controls {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-}
-
-/* UPGRADE BUTTONS */
-.upgrade-button,
-.upgrade1,
-.upgrade2,
-.upgrade3,
-.upgrade4,
-.planetChange,
-.suitChange,
-.reset-button,
-.backPlanet {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 12px 18px;
-    border: 1px solid #b905f5;
-    border-radius: 10px;
-
-    background: rgba(0, 2, 46, 0.9);
-    color: white;
-
-    font-size: 14px;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.upgrade-button:hover {
-    background: #51206b;
-}
-
-.reset-button {
-    border-color: #b905f5;
-}
-
-.reset-button:hover {
-    background: #51206b;
-}
-
 /* SMALL SCREEN SUPPORT */
 @media (max-width: 600px) {
     .game-header {
@@ -299,18 +306,6 @@ body {
         right: 12px;
         bottom: 16px;
     }
-
-    .upgrade-controls {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .upgrade-button,
-    .reset-button {
-        width: 100%;
-        max-width: 300px;
-    }
-
 }
 
 /* TOAST MESSAGES */
@@ -350,7 +345,7 @@ body {
 /* TITLES */
 .page-title {
     margin: 0;
-    font-size: clamp(28px,3vw,57px);
+    font-size: clamp(28px, 3vw, 57px);
     text-align: center;
     color: #e6a6ff;
     letter-spacing: 2px;
@@ -359,7 +354,7 @@ body {
 
 .upgrade-title {
     margin: 0;
-    font-size: clamp(24px,2.5vw,45px);
+    font-size: clamp(24px, 2.5vw, 45px);
     text-align: center;
     color: #e6a6ff;
     letter-spacing: 2px;
