@@ -93,10 +93,44 @@ function planetChange() {
     }
     points -= ascentCost;
     planetLevel++;
+    hp = 100;
+    ox = 100;
     setScene();
     updateDisplay();
     showToast("Ascent successful! Welcome to " + planets[planetLevel].name + ".", "success", 2000);
 }
+
+// Survivability values
+const oxygenDrain = 1; // Oxygen depletion per second on the moonn
+const oxygenThrreshold = 30; // Oxygen b4 health starts depleting
+const suffocateDmg = 5; // Health depletion per second when oxygen is 0
+
+function survivalTick() {
+    if (planetLevel <= 0) { // Only drain oxygen on planets other than Earth
+        ox = 100;
+        return;
+    }
+
+    const before = ox;
+    ox = Math.max(0, ox - oxygenDrain);
+    
+    if (before >= oxygenThrreshold && ox < oxygenThrreshold) {
+        showToast("Oxygen is low!", "error", 2000);
+    }
+
+    if (ox < oxygenThrreshold) {
+        hp = Math.max(0, hp - suffocateDmg);
+        if (hp === 0) {
+            resetGame("You died due to suffocation! Game reset.", "error", 2500);
+        }
+    }
+}
+
+setInterval(function () {
+    points += pointsPerSecond;
+    survivalTick();
+    updateDisplay();
+}, 1000);
 
 function updateDisplay() {
     document.getElementById("points").textContent = points;
@@ -113,6 +147,7 @@ function updateDisplay() {
 
 setInterval(function () {
     points += pointsPerSecond;
+    survivalTick();
     updateDisplay();
 }, 1000);
 
@@ -152,6 +187,7 @@ function resetGame() {
     points = 0;
     hp = 100;
     ox = 100;
+    planetLevel = 0;
     for (const key in buildings) {
         buildings[key].count = 0;
     }

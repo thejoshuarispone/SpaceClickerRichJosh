@@ -1,10 +1,9 @@
-
 * {
     box-sizing: border-box;
 }
 
 body {
-    display:flex;
+    display: flex;
     justify-content: 100px;
     align-items: center;
     user-select: none;
@@ -13,12 +12,12 @@ body {
     font-size: 20px;
     background-color: #00022E;
     color: white;
-    
+
 }
 
 .upgrade-section {
-    overflow-y: auto; 
-    overflow-x: hidden; 
+    overflow-y: auto;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,30 +25,46 @@ body {
     gap: 25px;
     margin-top: 0;
     width: 25vw;
-    height:100vh;   
+    height: 100vh;
 }
-.fangs-icon, .helmet-icon,.astronaut-icon, .planets-icon, .crowd-icon, .study-icon {
+
+.fangs-icon,
+.helmet-icon,
+.astronaut-icon,
+.planets-icon,
+.crowd-icon,
+.study-icon {
     width: 50px;
     height: 50px;
     margin-bottom: 16px;
 }
-.upgrade1, .upgrade2, .upgrade3, .upgrade4, .upgrade5, .suitChange, .planetChange, .reset-button {
+
+.upgrade1,
+.upgrade2,
+.upgrade3,
+.upgrade4,
+.upgrade5,
+.suitChange,
+.planetChange,
+.reset-button {
     align-items: center;
     width: 100%;
     margin-bottom: 8px;
 }
+
 .upgrade-text {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 4px;
 }
+
 .game-features {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 63px;
-    width: 25vw;   
+    width: 25vw;
 }
 
 /* MIDDLE SECTION: PLANET, TIGER, STATS */
@@ -73,10 +88,11 @@ body {
 .earth-wrapper {
     position: relative;
     z-index: 1;
-    width: 90%;                
-    max-width: 90vh;           
-    margin: auto;              
+    width: 90%;
+    max-width: 90vh;
+    margin: auto;
 }
+
 .background-image {
     display: block;
     width: 100%;
@@ -85,13 +101,14 @@ body {
 
 .tiger {
     position: absolute;
-    top:52%;
+    top: 52%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 25%;
     z-index: 2;
 }
-.playerstats{
+
+.playerstats {
     display: flex;
     flex-direction: column;
 }
@@ -109,17 +126,19 @@ body {
     align-items: center;
     gap: 16px;
 }
+
 /* CREDITS */
 .credit {
-        position: absolute;
-        bottom: 6px;
-        left: 0;
-        right: 0;
-        margin: 0;
-        text-align: leftrigh;
-        font-size: 12px;
-        opacity: 0.7;
-    }
+    position: absolute;
+    bottom: 6px;
+    left: 0;
+    right: 0;
+    margin: 0;
+    text-align: leftrigh;
+    font-size: 12px;
+    opacity: 0.7;
+}
+
 /* MAIN CLICKER */
 .steak {
     width: min(350px, 80%);
@@ -129,17 +148,22 @@ body {
     filter: drop-shadow(0 0 18px rgba(185, 5, 245, 0.5));
     transition: transform 0.1s, filter 0.2s;
 }
+
 .steak:hover {
     transform: scale(1.04);
     filter: drop-shadow(0 0 28px rgba(185, 5, 245, 0.9));
 }
-.steak:active { transform: scale(0.93); }
+
+.steak:active {
+    transform: scale(0.93);
+}
 
 /* the POP */
 .pop {
     position: fixed;
     z-index: 50;
-    pointer-events: none;      /* clicks pass through to the steak */
+    pointer-events: none;
+    /* clicks pass through to the steak */
     transform: translateX(-50%);
     font-family: "Press Start 2P", monospace;
     font-size: 18px;
@@ -149,8 +173,15 @@ body {
 }
 
 @keyframes rise {
-    from { opacity: 1; margin-top: 0; }
-    to   { opacity: 0; margin-top: -70px; }
+    from {
+        opacity: 1;
+        margin-top: 0;
+    }
+
+    to {
+        opacity: 0;
+        margin-top: -70px;
+    }
 }
 
 /* UPGRADE BUTTON LAYOUT */
@@ -206,7 +237,7 @@ body {
     }
 
     .bottom-controls {
-        left: 12px; 
+        left: 12px;
         right: 12px;
         bottom: 16px;
     }
@@ -221,7 +252,7 @@ body {
         width: 100%;
         max-width: 300px;
     }
-    
+
 }
 
 /* TOAST MESSAGES */
@@ -261,17 +292,18 @@ body {
 /* TITLES */
 .page-title {
     margin: 0;
-    font-size: 57px;          
+    font-size: 57px;
     text-align: center;
     color: #e6a6ff;
     letter-spacing: 2px;
-    text-shadow: 0 0 12px rgba(185, 5, 245, 0.8);   
+    text-shadow: 0 0 12px rgba(185, 5, 245, 0.8);
 }
+
 .upgrade-title {
     margin: 0;
-    font-size: 45px;          
+    font-size: 45px;
     text-align: center;
     color: #e6a6ff;
     letter-spacing: 2px;
-    text-shadow: 0 0 12px rgba(185, 5, 245, 0.8);   
+    text-shadow: 0 0 12px rgba(185, 5, 245, 0.8);
 }
