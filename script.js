@@ -106,7 +106,7 @@ const oxygenThrreshold = 30; // Oxygen b4 health starts depleting
 const suffocateDmg = 5; // Health depletion per second when oxygen is 0
 
 function survivalTick() {
-    if (planetLevel <= 0) { // Only drain oxygen on planets other than Earth
+    if (planetLevel === 0) { // Only drain oxygen on planets other than Earth
         ox = 100;
         return;
     }
@@ -137,6 +137,8 @@ function updateDisplay() {
     document.getElementById("perSecond").textContent = pointsPerSecond;
     document.getElementById("health").value = hp;
     document.getElementById("oxygen").value = ox;
+    document.getElementById("upgradeCost4").textContent = oxygenCost;
+    document.getElementById("level4").textContent = tanksUsed;
 
     for (const key in buildings) {
         const b = buildings[key];
@@ -183,10 +185,35 @@ function spawnPop(x, y, text) {
 // Placeholders so unfinished buttons don't throw errors
 function constantEarner1() { showToast("Coming soon!", "error"); }
 
+const oxygenCost = 500;
+let tanksUsed = 0;
+
+// Oxygen tank
+function buyOxygen() {
+    if (planetLevel === 0) {
+        showToast("Oxygen tanks are not needed on Earth!", "error");
+        return;
+    }
+    if (ox >= 100) {
+        showToast("Oxygen is already full!", "error");
+        return;
+    }
+    if (points < oxygenCost) {
+        showToast("Not enough points for Oxygen Tank!", "error");
+        return;
+    }
+    points -= oxygenCost;
+    ox = 100;
+    tanksUsed++;
+    updateDisplay();
+    showToast("Oxygen Tank used! Oxygen restored to 100.", "success");
+    }
+
 function resetGame() {
     points = 0;
     hp = 100;
     ox = 100;
+    tanksUsed = 0;
     planetLevel = 0;
     for (const key in buildings) {
         buildings[key].count = 0;
