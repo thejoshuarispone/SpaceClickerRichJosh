@@ -123,6 +123,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: right;
+    margin-bottom: auto;
+    width: auto;
 }
 
 

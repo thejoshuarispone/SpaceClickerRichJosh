@@ -7,6 +7,15 @@ let hp = 100;
 let ox = 100;
 let temp = 100;
 
+// Format large numbers using scientific notation
+function formatNumber(number) {
+    if (number >= 1_000_000) {
+        return number.toExponential(2);
+    }
+
+    return Math.floor(number).toLocaleString("en-US");
+}
+
 // Space Prog
 const suitCost = 5000;
 const ascentCost = 10000;
@@ -26,7 +35,7 @@ const buildings = {
 };
 
 function getCost(b) {
-    return Math.ceil(b.baseCost * Math.pow(1.15, b.count));   // +15% per purchase
+    return Math.ceil(b.baseCost * Math.pow(1.25, b.count));   // +45% per purchase
 }
 
 function recalcStats() {
@@ -152,8 +161,8 @@ setInterval(function () {
 }, 1000);
 
 function updateDisplay() {
-    document.getElementById("points").textContent = points;
-    document.getElementById("perSecond").textContent = pointsPerSecond;
+    document.getElementById("points").textContent = formatNumber(points);
+    document.getElementById("perSecond").textContent = formatNumber(pointsPerSecond);
     document.getElementById("health").value = hp;
     document.getElementById("oxygen").value = ox;
     document.getElementById("temp").value = temp;
@@ -184,7 +193,7 @@ function showToast(message, type, duration = 1000) {
 function earnPoints(e) {
     points += pointsPerClick;
     updateDisplay();
-    spawnPop(e.clientX, e.clientY, "+" + pointsPerClick);
+    spawnPop(e.clientX, e.clientY, "+" + formatNumber(pointsPerClick));
 }
 
 function spawnPop(x, y, text) {
