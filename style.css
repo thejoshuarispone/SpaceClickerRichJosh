@@ -62,7 +62,11 @@ body {
     width: 100%;
     margin-bottom: 8px;
 }
-
+.backplanet,
+.reset-button
+{
+  gap: 63px;  
+}
 .upgrade-text {
     display: flex;
     flex-direction: column;
