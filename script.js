@@ -5,7 +5,7 @@ let pointsPerSecond = 0;
 let upgradeCost = 10;
 let upgradeCost2 = 100;
 let toastTimer;
-let hp = health;
+let hp = 100;
 let ox = 100;
 
 function updateDisplay() {
@@ -13,11 +13,9 @@ function updateDisplay() {
     document.getElementById("upgradeCost").textContent = upgradeCost;
     document.getElementById("upgradeCost2").textContent = upgradeCost2;
     document.getElementById("perSecond").textContent = pointsPerSecond;
-    document.getElementById("health").textContent = hp;
-    document.getElementById("oxygen").textContent = oz;
+    document.getElementById("health").value = hp;
+    document.getElementById("oxygen").value = ox;
 }
-
-
 
 setInterval(function () {
     points += pointsPerSecond;
@@ -50,7 +48,7 @@ function spawnPop(x, y, text) {
     pop.style.left = (x + (Math.random() * 30 - 15)) + "px";
     pop.style.top = (y - 10) + "px";
     document.body.appendChild(pop);
-    pop.addEventListener("animationed", () => pop.remove());
+    setTimeout(() => pop.remove(), 800);
 }
 
 // Chomp upgrade
@@ -79,7 +77,7 @@ function buyUpgrade2() {
     }
 }
 
-// Placeholders so the unfinished buttons don't throw errors
+// Placeholders so unfinished buttons don't throw errors
 function constantEarner1() { showToast("Coming soon!", "error"); }
 function planetChange()    { showToast("Coming soon!", "error"); }
 
@@ -89,6 +87,8 @@ function resetGame() {
     pointsPerSecond = 0;
     upgradeCost = 10;
     upgradeCost2 = 100;
+    hp = 100;
+    ox = 100;
     updateDisplay();
     showToast("Game reset!", "success");
 }
