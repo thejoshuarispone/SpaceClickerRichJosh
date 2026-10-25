@@ -107,7 +107,7 @@ const oxygenThrreshold = 30; // Oxygen b4 health starts depleting
 const suffocateDmg = 5; // Health depletion per second when oxygen is 0
 
 function survivalTick() {
-    if (planetLevel === 0) { // Only drain oxygen on planets other than Earth
+    if (planetLevel <= 0) { // Only drain oxygen on planets other than Earth
         ox = 100;
         return;
     }
@@ -217,7 +217,6 @@ function resetGame(message = "Game reset!", type = "success", duration = 2500) {
     hasSuit = false;
     tanksUsed = 0;
     planetLevel = 0;
-    let hasSuit = false;
     for (const key in buildings) {
         buildings[key].count = 0;
     }
@@ -228,10 +227,15 @@ function resetGame(message = "Game reset!", type = "success", duration = 2500) {
 }
 
 function backPlanet(){
-    planetLevel--
-     setScene();
+    if (planetLevel <= 0) {
+        showToast("You are already on Earth!", "error");
+        return;
+    }
+    planetLevel--;
+    recalcStats();
+    setScene();
     updateDisplay();
-    showToast("Ascent successful! Welcome to " + planets[planetLevel].name + ".", "success", 2000);
+    showToast("Returned back! Welcome to " + planets[planetLevel].name + ".", "success", 2000);
 
 }
 
