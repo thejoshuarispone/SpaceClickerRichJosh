@@ -28,7 +28,7 @@ body {
     width: 25vw;
     height:100vh;   
 }
-.fangs-icon, .helmet-icon,.astronaut-icon, .planets-icon, .crowd-icon, .reset-icon {
+.fangs-icon, .helmet-icon,.astronaut-icon, .planets-icon, .crowd-icon, .study-icon {
     width: 50px;
     height: 50px;
     margin-bottom: 16px;
@@ -123,6 +123,7 @@ body {
 /* MAIN CLICKER */
 .steak {
     width: min(350px, 80%);
+    user-select: none;
     height: auto;
     cursor: pointer;
     filter: drop-shadow(0 0 18px rgba(185, 5, 245, 0.5));

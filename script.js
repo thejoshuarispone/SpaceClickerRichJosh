@@ -13,14 +13,11 @@ function updateDisplay() {
     document.getElementById("upgradeCost").textContent = upgradeCost;
     document.getElementById("upgradeCost2").textContent = upgradeCost2;
     document.getElementById("perSecond").textContent = pointsPerSecond;
-    document.getElementById("health").textContent = pointsPerSecond;
-    document.getElementById("oxygen").textContent = pointsPerSecond;
+    document.getElementById("health").textContent = hp;
+    document.getElementById("oxygen").textContent = oz;
 }
 
-hp = aliveStatus;
-if (aliveStatus >1){
-    hp = 100;
-}
+
 
 setInterval(function () {
     points += pointsPerSecond;
