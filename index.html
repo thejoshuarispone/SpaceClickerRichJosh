@@ -16,7 +16,7 @@
 
     <section class = "game-features">
         <h1 class="page-title">Tiger Clicker</h1>
-        <img src="assets/steak.png" alt="" class="steak" onclick="earnPoints(event)">
+        <img src="assets/steak.png" alt="Click the steak to earn points" class="steak" onclick="earnPoints(event)">
         <div class="game-header">
     <p>Click the Steak to earn points!</p>
 
@@ -40,93 +40,86 @@
         <img src="assets/tiger.png" alt="Tiger" class="tiger">
     </div>
     
-    <div class="playerstats">
-        <progress value="100" max="100" id="health"></progress>
-        <progress value="100" max="100" id="oxygen"></progress>
-        <p>Stats will be displayed here</p>
-
+       <div class="playerstats">
+       <label>HP <progress value="100" max="100" id="health"></progress></label>
+       <label>O2 <progress value="100" max="100" id="oxygen"></progress></label>
     </div>
+
 </section>
 
     <section class="upgrade-section">
-                    <h1 class="upgrade-title">Upgrades:</h1>
-                    <button class="upgrade1" onclick="buyUpgrade1()">
-                        <div class="upgrade-icon">
-                         <img src="./assets/fangs.png" alt="Fangs Icon" class="fangs-icon"> 
-                        </div>
-                        <div class="upgrade-text">
-                        Chomp Upgrade: 
-                        <p><span id="upgradeCost">10</span> points</div></p>
-                        <div class="upgrade-value"> 
-                        LVL
-                        </div>  
-                    </button>
+    <h2 class="upgrade-title">Upgrades:</h2>
 
-                    <button class="upgrade2" onclick="buyUpgrade2()">
-                        <div class="upgrade-icon">
-                         <img src="./assets/helmet.png" alt="Helmet Icon" class="helmet-icon"> 
-                        </div>
-                        <div class="upgrade-text">
-                        Hungry Football Team: 
-                        <p><span id="upgradeCost2">100</span> points</div></p>
-                        <div class="upgrade-value"> 
-                        LVL
-                        </div>  
-                    </button>
+    <button class="upgrade1" onclick="buyUpgrade1()">
+        <div class="upgrade-icon">
+            <img src="./assets/fangs.png" alt="Fangs Icon" class="fangs-icon">
+        </div>
+        <div class="upgrade-text">
+            Chomp Upgrade:
+            <p><span id="upgradeCost">10</span> points</p>
+        </div>
+        <div class="upgrade-value">LVL</div>
+    </button>
 
-                    <button class="upgrade3" onclick="constantEarner1()">
-                        <div class="upgrade-icon">
-                         <img src="./assets/crowd.png" alt="Crowd Icon" class="crowd-icon"> 
-                        </div>
-                        <div class="upgrade-text">
-                        Union Rush Hour: 
-                        <p><span id="upgradeCost">10</span> points</div></p>
-                        <div class="upgrade-value"> 
-                        LVL
-                        </div>  
-                    </button>
+    <button class="upgrade2" onclick="buyUpgrade2()">
+        <div class="upgrade-icon">
+            <img src="./assets/helmet.png" alt="Helmet Icon" class="helmet-icon">
+        </div>
+        <div class="upgrade-text">
+            Hungry Football Team:
+            <p><span id="upgradeCost2">100</span> points</p>
+        </div>
+        <div class="upgrade-value">LVL</div>
+    </button>
 
-                    <button class="upgrade4" onclick="constantEarner1()">
-                        <div class="upgrade-icon">
-                         <img src="./assets/study.png" alt="study Icon" class="study-icon"> 
-                        </div>
-                        <div class="upgrade-text">
-                        Super Study Group: 
-                        <p><span id="upgradeCost">10</span> points</div></p>
-                        <div class="upgrade-value"> 
-                        LVL
-                        </div>      
-                    </button>
+    <button class="upgrade3" onclick="constantEarner1()">
+        <div class="upgrade-icon">
+            <img src="./assets/crowd.png" alt="Crowd Icon" class="crowd-icon">
+        </div>
+        <div class="upgrade-text">
+            Union Rush Hour:
+            <p><span id="upgradeCost3">10</span> points</p>
+        </div>
+        <div class="upgrade-value">LVL</div>
+    </button>
 
-                    <button class="suitChange" alt = "upgrade5" onclick="constantEarner1()">
-                        <div class="upgrade-icon">
-                         <img src="./assets/astronaut.png" alt="Astronaut Icon" class="astronaut-icon"> 
-                        </div>
-                        <div class="upgrade-text">
-                        Space Suit Upgrade: 
-                        <p><span id="upgradeCost">10</span> points</div></p>
-                        <div class="upgrade-value"> 
-                        LVL
-                        </div>  
-                    </button>
+    <button class="upgrade4" onclick="constantEarner1()">
+        <div class="upgrade-icon">
+            <img src="./assets/study.png" alt="Study Icon" class="study-icon">
+        </div>
+        <div class="upgrade-text">
+            Super Study Group:
+            <p><span id="upgradeCost4">10</span> points</p>
+        </div>
+        <div class="upgrade-value">LVL</div>
+    </button>
 
-                    <button class="planetChange" alt = "upgrade6"onclick="planetChange()">
-                       <div class="upgrade-icon">
-                         <img src="./assets/planets.png" alt="Fangs Icon" class="fangs-icon"> 
-                        </div>
-                        <div class="upgrade-text">
-                        Change Planet: 
-                        <p><span id="upgradeCost">10</span> points</div></p>
-                        <div class="upgrade-value"> 
-                        LVL
-                        </div>    
-                    </button>
+    <button class="suitChange" onclick="constantEarner1()">
+        <div class="upgrade-icon">
+            <img src="./assets/astronaut.png" alt="Astronaut Icon" class="astronaut-icon">
+        </div>
+        <div class="upgrade-text">
+            Space Suit Upgrade:
+            <p><span id="upgradeCost5">10</span> points</p>
+        </div>
+        <div class="upgrade-value">LVL</div>
+    </button>
 
-                    <button class="reset-button" alt = "upgrade7" onclick="resetGame()">
-                        Reset Game
-                    </button>
+    <button class="planetChange" onclick="planetChange()">
+        <div class="upgrade-icon">
+            <img src="./assets/planets.png" alt="Planets Icon" class="planets-icon">
+        </div>
+        <div class="upgrade-text">
+            Change Planet:
+            <p><span id="upgradeCost6">10</span> points</p>
+        </div>
+        <div class="upgrade-value">LVL</div>
+    </button>
 
-    </section>
+    <button class="reset-button" onclick="resetGame()">
+        Reset Game
+    </button>
+</section>
 
 </body>
 </html>
