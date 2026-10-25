@@ -7,6 +7,7 @@ let hp = 100;
 let ox = 100;
 let temp = 100;
 
+
 // Format large numbers using scientific notation
 function formatNumber(number) {
     if (number >= 1_000_000) {
@@ -22,16 +23,16 @@ const ascentCost = 10000;
 let hasSuit = false;
 let planetLevel = 0;
 const planets = [
-    { name: "Earth", img: "assets/earth.png" },
-    { name: "Moon", img: "assets/moon.png" },
-    { name: "Mars", img: "assets/mars.png" }
+    { name: "Earth", img: "assets/earth.png", multiplier: 1 },
+    { name: "Moon", img: "assets/moon.png", multiplier: 2 },
+    { name: "Mars", img: "assets/mars.png", multiplier: 5 }
 ];
 
 // Buildings 
 const buildings = {
-    chomp: { name: "Chomp Upgrade", baseCost: 10, click: 1 * (1 + planetLevel), rate: 0, count: 0, costId: "upgradeCost", lvlId: "level1" },
-    football: { name: "Hungry Football Team", baseCost: 100, click: 0, rate: 1 * (1 + planetLevel), count: 0, costId: "upgradeCost2", lvlId: "level2" },
-    union: { name: "Union Rush Hour", baseCost: 1000, click: 0, rate: 10 * (1 + planetLevel), count: 0, costId: "upgradeCost3", lvlId: "level3" }
+    chomp: { name: "Chomp Upgrade", baseCost: 10, click: 1, rate: 0, count: 0, costId: "upgradeCost", lvlId: "level1" },
+    football: { name: "Hungry Football Team", baseCost: 100, click: 0, rate: 1, count: 0, costId: "upgradeCost2", lvlId: "level2" },
+    union: { name: "Union Rush Hour", baseCost: 1000, click: 0, rate: 10, count: 0, costId: "upgradeCost3", lvlId: "level3" }
 };
 
 function getCost(b) {
@@ -39,13 +40,23 @@ function getCost(b) {
 }
 
 function recalcStats() {
-    pointsPerClick = 1;      // base click value
-    pointsPerSecond = 0;
-    for (const key in buildings) {
-        const b = buildings[key];
-        pointsPerClick += b.count * b.click;
-        pointsPerSecond += b.count * b.rate;
-    }
+const multiplier = planets[planetLevel].multiplier;
+
+pointsPerClick = 1*multiplier;
+pointsPerSecond = 0;
+
+
+
+for (const key in buildings) {
+    const b = buildings[key];
+
+    pointsPerClick += b.count * b.click * multiplier;
+    pointsPerSecond += b.count * b.rate * multiplier;
+}
+
+console.log(pointsPerClick);
+console.log(pointsPerSecond);
+
 }
 
 function buyBuilding(key) {
@@ -54,7 +65,9 @@ function buyBuilding(key) {
     if (points >= cost) {
         points -= cost;
         b.count++;
+        console.log("buying building");
         recalcStats();
+        console.log("after recalc");
         updateDisplay();
         const gain = b.click ? "+" + b.click + " per click" : "+" + b.rate + " per second";
         showToast(b.name + " purchased! " + gain, "success");
@@ -106,6 +119,9 @@ function planetChange() {
     planetLevel++;
     hp = 100;
     ox = 100;
+    temp = 100;
+
+    recalcStats();
     setScene();
     updateDisplay();
     showToast("Ascent successful! Welcome to " + planets[planetLevel].name + ".", "success", 2000);
