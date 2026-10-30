@@ -54,6 +54,7 @@ img {
 /* ICON SLOT: */
 .upgrade-icon {
     width: var(--slot);
+    margin: 0;
     flex-shrink: 0;
     display: flex;
     justify-content: center;
@@ -717,4 +718,4 @@ img {
         font-size: 15px;
     }
 }
-```
+

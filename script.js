@@ -84,8 +84,8 @@ let hasSuit = false;
 let planetLevel = 0;
 const planets = [
     { name: "Earth", img: "assets/earth.png", multiplier: 1 },
-    { name: "Moon", img: "assets/moon.png", multiplier: 2 },
-    { name: "Mars", img: "assets/mars.png", multiplier: 5 }
+    { name: "Moon", img: "assets/moon.jpg", multiplier: 2 },
+    { name: "Mars", img: "assets/mars.jpg", multiplier: 5 }
 ];
 
 // Buildings 
